@@ -7,3 +7,6 @@ class Animal:
         self.health = 100
         self.hidden = False
 
+class Herbivore(Animal):
+    def hide(self) -> None:
+        self.hidden = True
