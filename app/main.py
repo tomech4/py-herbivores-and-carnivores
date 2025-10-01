@@ -7,16 +7,22 @@ class Animal:
         self.hidden = False
         self.alive.append(self)
 
-    def __repr__(self):
-        return f"{{Name: {self.name}, Health: {self.health}, Hidden: {self.hidden}}}"
+    def __repr__(self) -> str:
+        return (
+            f"{{Name: {self.name}, "
+            f"Health: {self.health}, "
+            f"Hidden: {self.hidden}}}"
+        )
+
 
 class Herbivore(Animal):
     def hide(self) -> None:
         self.hidden = not self.hidden
 
+
 class Carnivore(Animal):
     @staticmethod
-    def bite(animal: Animal):
+    def bite(animal: Animal) -> None:
         if (
                 isinstance(animal, Herbivore)
                 and animal.hidden is False
