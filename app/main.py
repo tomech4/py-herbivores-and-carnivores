@@ -8,6 +8,17 @@ class Animal:
         self.hidden = False
         self.alive += self
 
+    @classmethod
+    def __str__(cls):
+        return [
+            {
+                "Name": animal.name,
+                "Health": animal.health,
+                "Hidden": animal.hidden
+            }
+            for animal in cls.alive
+        ]
+
 class Herbivore(Animal):
     def hide(self) -> None:
         self.hidden = True
