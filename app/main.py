@@ -1,36 +1,28 @@
 class Animal:
     alive = []
 
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, health: int = 100) -> None:
         self.name = name
-        self.health = 100
+        self.health = health
         self.hidden = False
-        self.alive += self
+        self.alive.append(self)
 
-    @classmethod
-    def __str__(cls):
-        return [
-            {
-                "Name": animal.name,
-                "Health": animal.health,
-                "Hidden": animal.hidden
-            }
-            for animal in cls.alive
-        ]
+    def __repr__(self):
+        return f"{{Name: {self.name}, Health: {self.health}, Hidden: {self.hidden}}}"
 
 class Herbivore(Animal):
     def hide(self) -> None:
-        self.hidden = True
+        self.hidden = not self.hidden
 
 class Carnivore(Animal):
     @staticmethod
     def bite(animal: Animal):
         if (
-                animal is Herbivore
+                isinstance(animal, Herbivore)
                 and animal.hidden is False
                 and animal.health > 0
         ):
             animal.health -= 50
 
-        if animal.health == 0:
+        if animal.health <= 0:
             Animal.alive.remove(animal)
