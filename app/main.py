@@ -1,6 +1,5 @@
 class Animal:
     alive = []
-    # include class instances, if health = 0, remove from the list
 
     def __init__(self, name: str) -> None:
         self.name = name
