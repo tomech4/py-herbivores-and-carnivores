@@ -6,6 +6,7 @@ class Animal:
         self.name = name
         self.health = 100
         self.hidden = False
+        self.alive += self
 
 class Herbivore(Animal):
     def hide(self) -> None:
