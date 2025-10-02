@@ -5,14 +5,18 @@ class Animal:
     alive: list[Animal] = []
 
     def __init__(
-            self,
-            name: str,
-            health: int = 100
+        self,
+        name: str,
+        health: int = 100
     ) -> None:
         self.name = name
         self.health = health
         self.hidden = False
-        Animal.alive.append(self)
+        if (
+            self.health > 0
+            and self not in Animal.alive
+        ):
+            Animal.alive.append(self)
 
     def __repr__(self) -> str:
         return (
@@ -30,18 +34,18 @@ class Herbivore(Animal):
 class Carnivore(Animal):
     @staticmethod
     def bite(
-            animal: Herbivore
+        animal: Herbivore
     ) -> None:
         if (
-                isinstance(animal, Herbivore)
-                and animal.hidden is False
-                and animal.health > 0
+            isinstance(animal, Herbivore)
+            and animal.hidden is False
+            and animal.health > 0
         ):
             animal.health -= 50
 
         if (
-                isinstance(animal, Herbivore)
-                and animal in Animal.alive
-                and animal.health <= 0
+            isinstance(animal, Herbivore)
+            and animal in Animal.alive
+            and animal.health <= 0
         ):
             Animal.alive.remove(animal)
